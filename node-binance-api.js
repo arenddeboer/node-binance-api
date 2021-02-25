@@ -1288,6 +1288,7 @@ let api = function Binance( options = {} ) {
         };
         updateData = updateConverter( updateData );
         return {
+            e: data,
             eventType,
             eventTime,
             transaction,
@@ -1379,6 +1380,7 @@ let api = function Binance( options = {} ) {
         };
         order = orderConverter( order );
         return {
+            e: data,
             eventType,
             eventTime,
             transaction,
