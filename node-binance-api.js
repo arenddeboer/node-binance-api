@@ -1288,7 +1288,6 @@ let api = function Binance( options = {} ) {
         };
         updateData = updateConverter( updateData );
         return {
-            e: data,
             eventType,
             eventTime,
             transaction,
@@ -1380,7 +1379,6 @@ let api = function Binance( options = {} ) {
         };
         order = orderConverter( order );
         return {
-            e: data,
             eventType,
             eventTime,
             transaction,
@@ -2075,14 +2073,14 @@ let api = function Binance( options = {} ) {
     const userFutureDataHandler = data => {
         let type = data.e;
         if ( type === 'MARGIN_CALL' ) {
-            Binance.options.future_margin_call_callback( fUserDataMarginConvertData( data ) );
+            Binance.options.future_margin_call_callback( fUserDataMarginConvertData( data ), data );
         } else if ( type === 'ACCOUNT_UPDATE' ) {
             if ( Binance.options.future_account_update_callback ) {
-                Binance.options.future_account_update_callback( fUserDataAccountUpdateConvertData( data ) );
+                Binance.options.future_account_update_callback( fUserDataAccountUpdateConvertData( data ), data );
             }
         } else if ( type === 'ORDER_TRADE_UPDATE' ) {
             if ( Binance.options.future_order_update_callback ) {
-                Binance.options.future_order_update_callback( fUserDataOrderUpdateConvertData( data ) );
+                Binance.options.future_order_update_callback( fUserDataOrderUpdateConvertData( data ), data );
             }
         } else {
             Binance.options.log( 'Unexpected userFutureData: ' + type );
